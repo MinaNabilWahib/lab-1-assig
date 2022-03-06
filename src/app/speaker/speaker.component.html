@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col">
+    <input type="text" [(ngModel)]="speakerUpdate._id" class="form-control" placeholder="id" aria-label="id" >
+  </div>
+  <div class="col">
+    <input type="text" [(ngModel)]="speakerUpdate.name" class="form-control" placeholder="name" aria-label="name">
+  </div>
+  <div class="col">
+    <input type="date" [(ngModel)]="speakerUpdate.birthdate" id="date" >
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <input type="text" [(ngModel)]="speakerUpdate.hourRate" class="form-control" placeholder="hour rate" aria-label="hourRate" >
+  </div>
+  <div class="col">
+    <input type="text" [(ngModel)]="speakerUpdate.address" class="form-control" placeholder="address" aria-label="address" >
+  </div>
+  <div class="col">
+    <label for="select">Images</label>
+    <select id="select" [(ngModel)]="speakerUpdate.image">
+      <option value="">Choose...</option>
+      <optgroup label="images">
+        <option value="../../assets/image1.jpeg">image1</option>
+        <option value="../../assets/image2.jpeg">image2</option>
+        <option value="../../assets/image3.jpeg">image3</option>
+      </optgroup>
+    </select>
+</div>
+  <div class="row">
+    <div class="col">
+      <label>
+        <input type="checkbox" [(ngModel)]="speakerUpdate.isMarried" >
+        Is Married
+      </label>
+    </div>
+    <div class="col">
+        <label for="select">government</label>
+        <select id="select" [(ngModel)]="speakerUpdate.government">
+          <option value="">Choose...</option>
+          <optgroup label="government">
+            <option value="alex">alex</option>
+            <option value="mansoura">mansoura</option>
+            <option value="smart">smart</option>
+          </optgroup>
+        </select>
+    </div>
+    <div class="col">
+      <button (click)="addSpeaker()" >add</button>
+    </div>
+    <div class="col">
+      <button (click)="showImages()" >show images</button>
+    </div>
+</div>
+<table class="table table-bordered table-hover table-stripped" *ngIf="speakers.length>0">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Birth Date</th>
+      <th scope="col">Rate Hour</th>
+      <th scope="col" *ngIf="show==true">image</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of speakers;let s=index;let f=even">
+      <td>{{item._id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.birthdate|date:'dd/MMMM'|uppercase}}</td>
+      <td>{{item.hourRate|currency}}</td>
+      <td *ngIf="show==true"><img src={{item.image}} width="20px" height="20px"></td>
+      <td>
+      <button  class="btn btn-primary" (click)="showDetails(item._id)"> Details</button> |
+      <button  class="btn btn-danger" (click)="delete(item._id)"> Delete</button> |
+      <button  class="btn btn-success" (click)="update(item._id)"> Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  {{speaker._id}} , {{speaker.name}} , {{speaker.birthdate|date:'dd/MMMM'|uppercase}} , {{speaker.address}} ,{{speaker.hourRate}} , <img src={{speaker.image}} width="100px" height="100px" >, {{speaker.isMarried}} , {{speaker.government}}
+</div>
+
